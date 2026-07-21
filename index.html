@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>灵溯·天枢 - 动车组全生命周期智能运维解决方案</title>
     <style>
         * {
@@ -10,154 +10,116 @@
             padding: 0;
             box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             background-color: #f8fafc;
             color: #334155;
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         /* 顶部导航栏 */
         header {
             background-color: #1e293b;
             color: #fff;
-            height: 64px;
-            display: table;
-            width: 100%;
-            padding: 0 40px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            padding: 12px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
 
         .header-container {
-            display: table-row;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .logo-box {
-            display: table-cell;
-            vertical-align: middle;
-            width: 260px;
+            display: flex;
+            align-items: center;
         }
 
         .logo-box img {
-            height: 38px;
-            vertical-align: middle;
-            margin-right: 12px;
-            /* 提示：用您自己的图片替换 src */
+            height: 32px;
+            margin-right: 10px;
+            object-fit: contain;
         }
 
         .brand-name {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             color: #38bdf8;
-            vertical-align: middle;
         }
 
         nav {
-            display: table-cell;
-            vertical-align: middle;
-            text-align: right;
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
         nav a {
             color: #cbd5e1;
             text-decoration: none;
-            margin-left: 32px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
-            transition: color 0.3s;
         }
 
-        nav a:hover, nav a.active {
+        nav a.active {
             color: #38bdf8;
         }
 
         .lang-switch {
-            display: inline-block;
-            margin-left: 32px;
-            padding: 4px 10px;
+            padding: 3px 8px;
             border: 1px solid #475569;
             border-radius: 4px;
-            font-size: 13px;
+            font-size: 12px;
             color: #94a3b8;
         }
 
-        /* Hero 横幅区域 */
+        /* Banner 区域 */
         .hero {
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
             color: #fff;
-            padding: 60px 40px;
-            position: relative;
-            overflow: hidden;
+            padding: 40px 20px;
             border-bottom: 4px solid #0284c7;
         }
 
         .hero-content {
             max-width: 1200px;
             margin: 0 auto;
-            display: table;
-            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
         }
 
-        .hero-text {
-            display: table-cell;
-            vertical-align: middle;
-            width: 55%;
-        }
+        .hero-text { flex: 1; }
+        .hero-title-en { font-size: 22px; font-weight: 800; color: #38bdf8; margin-bottom: 6px; }
+        .hero-title-cn { font-size: 26px; font-weight: 700; color: #f8fafc; margin-bottom: 12px; }
+        .hero-subtitle { font-size: 14px; color: #94a3b8; }
+        
+        .hero-image { flex: 1; text-align: center; }
+        .hero-image img { width: 100%; max-width: 480px; border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
 
-        .hero-title-en {
-            font-size: 28px;
-            font-weight: 800;
-            letter-spacing: 2px;
-            color: #38bdf8;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .hero-title-cn {
-            font-size: 32px;
-            font-weight: 700;
-            color: #f8fafc;
-            margin-bottom: 16px;
-        }
-
-        .hero-subtitle {
-            font-size: 16px;
-            color: #94a3b8;
-            max-width: 520px;
-            line-height: 1.8;
-        }
-
-        .hero-image {
-            display: table-cell;
-            vertical-align: middle;
-            width: 45%;
-            text-align: right;
-        }
-
-        .hero-image img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
-        }
-
-        /* 主体内容布局 */
+        /* 主体布局 */
         .main-container {
             max-width: 1200px;
-            margin: 40px auto;
+            margin: 30px auto;
             padding: 0 20px;
-            display: table;
-            width: 100%;
+            display: flex;
+            gap: 30px;
         }
 
-        /* 左侧边栏导航 */
         .sidebar {
-            display: table-cell;
-            width: 280px;
-            vertical-align: top;
-            padding-right: 30px;
+            width: 250px;
+            flex-shrink: 0;
         }
 
         .menu-list {
@@ -167,21 +129,23 @@
             overflow: hidden;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             border: 1px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
         }
 
+        /* 选项卡按钮样式 */
         .menu-item {
-            padding: 16px 20px;
+            padding: 16px 18px;
             font-size: 15px;
             font-weight: 600;
             color: #475569;
             border-bottom: 1px solid #f1f5f9;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.25s ease;
+            user-select: none;
         }
 
-        .menu-item:last-child {
-            border-bottom: none;
-        }
+        .menu-item:last-child { border-bottom: none; }
 
         .menu-item.active {
             background-color: #f0f9ff;
@@ -189,153 +153,162 @@
             border-left: 4px solid #0284c7;
         }
 
-        .menu-item:hover:not(.active) {
-            background-color: #f8fafc;
-            color: #0f172a;
-        }
-
-        /* 右侧主要内容区 */
+        /* 内容面板控制 */
         .content-area {
-            display: table-cell;
-            vertical-align: top;
+            flex: 1;
             background: #fff;
-            padding: 36px;
+            padding: 30px;
             border-radius: 8px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.05);
             border: 1px solid #e2e8f0;
+            min-height: 380px;
+        }
+
+        /* 默认隐藏所有 tab 内容 */
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        /* 激活时显示 */
+        .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .section-title {
-            font-size: 24px;
+            font-size: 20px;
             color: #0f172a;
-            margin-bottom: 24px;
-            padding-bottom: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 8px;
             border-bottom: 2px solid #0284c7;
             display: inline-block;
         }
 
-        /* 特性卡片 */
         .feature-tag-container {
-            margin: 20px 0;
-            display: block;
+            margin: 15px 0 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
         }
 
         .tag {
-            display: inline-block;
             background: #e0f2fe;
             color: #0369a1;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
+            padding: 5px 12px;
+            border-radius: 16px;
+            font-size: 12px;
             font-weight: 600;
-            margin-right: 10px;
-            margin-bottom: 10px;
         }
 
         .card-grid {
-            margin-top: 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 20px;
         }
 
         .card {
             background: #f8fafc;
             border: 1px solid #e2e8f0;
             border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 18px;
         }
 
-        .card h4 {
-            color: #0369a1;
-            font-size: 16px;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-        }
+        .card h4 { color: #0369a1; font-size: 15px; margin-bottom: 8px; }
+        .card p { font-size: 13px; color: #475569; line-height: 1.6; }
 
-        .card p {
-            font-size: 14px;
-            color: #475569;
-            line-height: 1.7;
-        }
-
-        /* 页脚 */
         footer {
             background-color: #0f172a;
             color: #64748b;
             text-align: center;
-            padding: 24px 0;
-            font-size: 13px;
-            margin-top: 60px;
-            border-top: 1px solid #1e293b;
+            padding: 20px;
+            font-size: 12px;
+            margin-top: 40px;
+        }
+
+        /* 📱 手机端适配 */
+        @media (max-width: 768px) {
+            .hero-content { flex-direction: column-reverse; }
+            .main-container { flex-direction: column; padding: 0 15px; }
+            .sidebar { width: 100%; }
+            .menu-list {
+                flex-direction: row;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+            .menu-item {
+                padding: 12px 16px;
+                font-size: 14px;
+                border-bottom: none;
+                border-right: 1px solid #f1f5f9;
+                white-space: nowrap;
+            }
+            .menu-item.active {
+                border-left: none;
+                border-bottom: 3px solid #0284c7;
+            }
+            .content-area { padding: 20px 15px; }
+            .card-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. 顶部导航栏 -->
     <header>
         <div class="header-container">
             <div class="logo-box">
-                <!-- 自定义上传 Logo 图标占位 -->
-                <img src="https://via.placeholder.com/120x40/0284c7/ffffff?text=LOGO" alt="灵溯·天枢 Logo" id="site-logo">
+                <img src="https://github.com/lengyuxuan22/my-image-bed/blob/main/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260721203244_164_412.png?raw=true" alt="灵溯·天枢 Logo" id="site-logo">
                 <span class="brand-name">灵溯·天枢</span>
             </div>
             <nav>
                 <a href="#" class="active">首页</a>
-                <a href="#">交通方案</a>
                 <a href="#">智能运维</a>
-                <a href="#">研发实力</a>
-                <a href="#">关于我们</a>
                 <span class="lang-switch">EN / CN</span>
             </nav>
         </div>
     </header>
 
-    <!-- 2. Hero Banner 区域 -->
     <section class="hero">
         <div class="hero-content">
             <div class="hero-text">
                 <div class="hero-title-en">INTELLIGENT EMU PHM SYSTEM</div>
-                <div class="hero-title-cn">灵溯·天枢 动车组全生命周期智能运维解决方案</div>
+                <div class="hero-title-cn">动车组全生命周期智能运维解决方案</div>
                 <div class="hero-subtitle">依托中国超大规模高铁路网实测数据，打造“数据驱动、提前预警、降本增效”的专属智能预测运维新范式。</div>
             </div>
             <div class="hero-image">
-                <!-- Banner 演示图，可用本地图片替换 src -->
-                <img src="https://via.placeholder.com/500x280/1e293b/38bdf8?text=High-Speed+Train+PHM" alt="智能动车运维">
+                <img src="https://github.com/lengyuxuan22/my-image-bed/blob/main/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260721191445_149_412.png?raw=true" alt="智能动车运维">
             </div>
         </div>
     </section>
 
-    <!-- 3. 主体内容（左侧导航 + 右侧详情） -->
     <div class="main-container">
         
-        <!-- 左侧菜单 -->
         <aside class="sidebar">
             <ul class="menu-list">
-                <li class="menu-item active">产品介绍 (PHM系统)</li>
-                <li class="menu-item">购买渠道与售卖模式</li>
-                <li class="menu-item">售后服务与技术支持</li>
+                <li class="menu-item active" onclick="switchTab(0)">产品介绍</li>
+                <li class="menu-item" onclick="switchTab(1)">购买渠道</li>
+                <li class="menu-item" onclick="switchTab(2)">售后服务</li>
             </ul>
         </aside>
 
-        <!-- 右侧内容展示区 -->
         <main class="content-area">
             
-            <!-- 板块 1: 产品介绍 -->
-            <section style="margin-bottom: 40px;">
+            <div class="tab-panel active">
                 <h2 class="section-title">产品介绍</h2>
-                
                 <div class="feature-tag-container">
-                    <span class="tag">中国高铁海量数据</span>
-                    <span class="tag">十四五数智化转型</span>
-                    <span class="tag">海外专属PHM方案</span>
+                    <span class="tag">中国高铁数据</span>
+                    <span class="tag">十四五规划</span>
+                    <span class="tag">海外专属PHM</span>
                     <span class="tag">全生命周期优化</span>
                 </div>
-
-                <p style="font-size: 15px; color: #334155; line-height: 1.8; margin-bottom: 20px;">
+                <p style="font-size: 14px; color: #334155; line-height: 1.7; margin-bottom: 15px;">
                     本产品是依托中国全球最大高铁网络、海量轨道运维数据，贴合国家“十四五”数智化转型规划研发的高铁 <strong>PHM（故障预测与健康管理）智能运维系统</strong>。作为面向海外市场的动车组全生命周期智能运维解决方案，主打<b>“数据驱动、提前预警、降本增效”</b>核心优势，打造专属中国动车组的国际化运维方案。
                 </p>
-
                 <div class="card-grid">
                     <div class="card">
                         <h4>针对海外痛点研发</h4>
@@ -346,41 +319,53 @@
                         <p>对比西班牙等海外传统高铁运维体系，具备独家海量行业实测数据积累与传感器全生命周期优化的核心壁垒。</p>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <!-- 板块 2: 购买渠道 -->
-            <section style="margin-bottom: 40px;">
+            <div class="tab-panel">
                 <h2 class="section-title">购买渠道</h2>
-                <div class="card" style="background: #f0f9ff; border-color: #bae6fd;">
-                    <h4 style="color: #0369a1;">随车绑定售卖模式（核心主流渠道）</h4>
-                    <p style="color: #0c4a6e;">
+                <div class="card" style="background: #f0f9ff; border-color: #bae6fd; margin-top: 15px;">
+                    <h4 style="color: #0369a1; font-size: 16px;">随车绑定售卖模式（核心主流渠道）</h4>
+                    <p style="color: #0c4a6e; font-size: 14px; margin-top: 8px;">
                         本系统主打随车绑定售卖模式，与高铁动车组设备配套绑定输出。面向海外高铁项目及轨道交通合作方进行定向落地，是产品的核心主流销售渠道。
                     </p>
                 </div>
-            </section>
+            </div>
 
-            <!-- 板块 3: 售后服务 -->
-            <section>
+            <div class="tab-panel">
                 <h2 class="section-title">售后服务</h2>
                 <div class="card-grid">
                     <div class="card">
                         <h4>专属产品咨询指南</h4>
-                        <p>为海外客户提供产品功能、技术参数、适配场景、收费模式、定制化服务等全维度咨询解答，助力客户快速全面了解产品服务体系。</p>
+                        <p>为海外客户提供产品功能、技术参数、适配场景、收费模式、定制化服务等全维度咨询解答，助力客户全面了解产品体系。</p>
                     </div>
                     <div class="card">
                         <h4>完善的售后服务索引体系</h4>
-                        <p>覆盖产品部署调试、系统运维、数据更新、功能迭代、故障排查等全流程售后工作。依托大数据后台持续保障系统稳定运行，解决海外售后响应慢、成本高的痛点。</p>
+                        <p>覆盖产品部署调试、系统运维、数据更新、功能迭代、故障排查等全流程售后工作。依托大数据后台持续保障系统稳定运行，解决海外响应慢、成本高的痛点。</p>
                     </div>
                 </div>
-            </section>
+            </div>
 
         </main>
     </div>
 
-    <!-- 4. 页脚 -->
     <footer>
-        <p>&copy; 2026 灵溯·天枢 (Lingsu Tianshu). All Rights Reserved. 动车组全生命周期智能运维系统</p>
+        <p>&copy; 2026 灵溯·天枢 (Lingsu Tianshu)<br>动车组全生命周期智能运维系统</p>
     </footer>
 
+    <script>
+        function switchTab(index) {
+            // 获取所有的菜单项和内容面板
+            const menuItems = document.querySelectorAll('.menu-item');
+            const tabPanels = document.querySelectorAll('.tab-panel');
+
+            // 清除所有的 active 类
+            menuItems.forEach(item => item.classList.remove('active'));
+            tabPanels.forEach(panel => panel.classList.remove('active'));
+
+            // 给被点击的菜单和对应的面板添加 active 类
+            menuItems[index].classList.add('active');
+            tabPanels[index].classList.add('active');
+        }
+    </script>
 </body>
 </html>
