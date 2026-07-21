@@ -13,27 +13,47 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        :root {
+            --primary: #0284c7;
+            --primary-light: #38bdf8;
+            --primary-bg: #eaf7ff;
+            --dark: #0f172a;
+            --gray-50: #ffffff;
+            --gray-100: #f8fafc;
+            --gray-200: #e2e8f0;
+            --gray-300: #cbd5e1;
+            --gray-600: #475569;
+            --gray-800: #1e293b;
+            --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background-color: #f8fafc;
-            color: #334155;
-            line-height: 1.6;
+            background-color: var(--gray-100);
+            color: var(--gray-800);
+            line-height: 1.75;
             overflow-x: hidden;
         }
 
-        /* 顶部导航栏 */
+        /* ========== 导航头部 ========== */
         header {
-            background-color: #1e293b;
-            color: #fff;
-            padding: 12px 20px;
+            background-color: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            border-bottom: 1px solid var(--gray-200);
+            transition: var(--transition-base);
         }
 
-        .header-container {
-            max-width: 1200px;
+        .header-wrap {
+            max-width: 1280px;
             margin: 0 auto;
+            padding: 16px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -42,279 +62,533 @@
         .logo-box {
             display: flex;
             align-items: center;
+            gap: 12px;
         }
 
         .logo-box img {
-            height: 32px;
-            margin-right: 10px;
+            height: 40px;
             object-fit: contain;
         }
-
-        .brand-name {
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            color: #38bdf8;
+        /* 顶部导航艺术字样式 */
+        .brand-art-logo {
+            height: 34px;
+            object-fit: contain;
+            display: block;
         }
 
-        nav {
+        .header-nav {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 36px;
         }
 
-        nav a {
-            color: #cbd5e1;
+        .header-nav a {
             text-decoration: none;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 500;
+            color: var(--gray-600);
+            position: relative;
+            transition: var(--transition-base);
         }
 
-        nav a.active {
-            color: #38bdf8;
+        .header-nav a:hover,
+        .header-nav a.active {
+            color: var(--primary);
+        }
+
+        .header-nav a.active::after {
+            content: "";
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary);
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            border-radius: 2px;
         }
 
         .lang-switch {
-            padding: 3px 8px;
-            border: 1px solid #475569;
-            border-radius: 4px;
-            font-size: 12px;
-            color: #94a3b8;
+            padding: 6px 12px;
+            border: 1px solid var(--gray-300);
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: var(--transition-base);
         }
 
-        /* Banner 区域 */
+        .lang-switch:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* ========== 首屏Banner ========== */
         .hero {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-            color: #fff;
-            padding: 40px 20px;
-            border-bottom: 4px solid #0284c7;
+            background: linear-gradient(120deg, #ffffff 0%, #f0f9ff 100%);
+            padding: 80px 24px;
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero-content {
-            max-width: 1200px;
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(2, 132, 199, 0.07) 0%, transparent 70%);
+            right: -220px;
+            top: -240px;
+            pointer-events: none;
+        }
+
+        .hero-container {
+            max-width: 1280px;
             margin: 0 auto;
             display: flex;
-            flex-direction: row;
             align-items: center;
-            justify-content: space-between;
-            gap: 30px;
+            gap: 64px;
+            position: relative;
+            z-index: 2;
         }
 
-        .hero-text { flex: 1; }
-        .hero-title-en { font-size: 22px; font-weight: 800; color: #38bdf8; margin-bottom: 6px; }
-        .hero-title-cn { font-size: 26px; font-weight: 700; color: #f8fafc; margin-bottom: 12px; }
-        .hero-subtitle { font-size: 14px; color: #94a3b8; }
-        
-        .hero-image { flex: 1; text-align: center; }
-        .hero-image img { width: 100%; max-width: 480px; border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+        .hero-text {
+            flex: 1;
+        }
 
-        /* 主体布局 */
-        .main-container {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
+        .hero-title-en {
+            font-size: 28px;
+            color: var(--primary);
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .hero-title-cn {
+            font-size: 38px;
+            color: var(--dark);
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 16px;
+        }
+
+        .hero-subtitle {
+            font-size: 17px;
+            color: var(--gray-600);
+            line-height: 1.8;
+            max-width: 680px;
+            margin-bottom: 36px;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 14px 36px;
+            background-color: var(--primary);
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: var(--transition-base);
+            box-shadow: 0 6px 18px rgba(2, 132, 199, 0.22);
+        }
+
+        .contact-btn:hover {
+            background-color: #0369a1;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 26px rgba(2, 132, 199, 0.26);
+        }
+
+        .hero-pic {
+            flex: 1;
+            text-align: right;
+        }
+
+        .hero-pic img {
+            width: 100%;
+            max-width: 560px;
+            border-radius: 18px;
+            box-shadow: 0 20px 50px rgba(2, 132, 199, 0.12);
+            transition: var(--transition-base);
+            border: 1px solid rgba(2, 132, 199, 0.12);
+        }
+
+        .hero-pic img:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 26px 60px rgba(2, 132, 199, 0.16);
+        }
+
+        /* ========== 主体区域 ========== */
+        .main-wrap {
+            max-width: 1280px;
+            margin: 70px auto;
+            padding: 0 24px;
             display: flex;
-            gap: 30px;
+            gap: 36px;
         }
 
         .sidebar {
-            width: 250px;
+            width: 260px;
             flex-shrink: 0;
         }
 
-        .menu-list {
-            list-style: none;
+        .side-menu {
             background: #fff;
-            border-radius: 8px;
+            border-radius: 16px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05);
             overflow: hidden;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
-            display: flex;
-            flex-direction: column;
         }
 
-        /* 选项卡按钮样式 */
-        .menu-item {
-            padding: 16px 18px;
-            font-size: 15px;
+        .side-menu-item {
+            padding: 18px 24px;
+            font-size: 16px;
             font-weight: 600;
-            color: #475569;
-            border-bottom: 1px solid #f1f5f9;
+            color: var(--gray-600);
             cursor: pointer;
-            transition: all 0.25s ease;
+            transition: var(--transition-base);
+            position: relative;
             user-select: none;
         }
 
-        .menu-item:last-child { border-bottom: none; }
-
-        .menu-item.active {
-            background-color: #f0f9ff;
-            color: #0284c7;
-            border-left: 4px solid #0284c7;
+        .side-menu-item:not(:last-child) {
+            border-bottom: 1px solid var(--gray-100);
         }
 
-        /* 内容面板控制 */
-        .content-area {
+        .side-menu-item:hover:not(.active) {
+            background-color: var(--gray-100);
+            color: var(--primary);
+            padding-left: 28px;
+        }
+
+        .side-menu-item.active {
+            background: linear-gradient(90deg, var(--primary-bg), #ffffff);
+            color: var(--primary);
+        }
+
+        .side-menu-item.active::before {
+            content: "";
+            width: 5px;
+            height: 60%;
+            background-color: var(--primary);
+            position: absolute;
+            left: 0;
+            top: 20%;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .tab-content-box {
             flex: 1;
             background: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
-            min-height: 380px;
+            border-radius: 18px;
+            padding: 48px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--gray-200);
+            min-height: 420px;
         }
 
-        /* 默认隐藏所有 tab 内容 */
         .tab-panel {
             display: none;
-            animation: fadeIn 0.3s ease-in-out;
+            animation: fadeUp 0.4s ease-out;
         }
 
-        /* 激活时显示 */
         .tab-panel.active {
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .section-title {
-            font-size: 20px;
-            color: #0f172a;
-            margin-bottom: 20px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #0284c7;
-            display: inline-block;
+            font-size: 26px;
+            color: var(--dark);
+            margin-bottom: 28px;
+            padding-bottom: 12px;
+            border-left: 5px solid var(--primary);
+            padding-left: 14px;
         }
 
-        .feature-tag-container {
-            margin: 15px 0 20px 0;
+        .tag-group {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 12px;
+            margin: 24px 0 30px;
         }
 
         .tag {
-            background: #e0f2fe;
+            background-color: var(--primary-bg);
             color: #0369a1;
-            padding: 5px 12px;
-            border-radius: 16px;
-            font-size: 12px;
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 13px;
             font-weight: 600;
+            transition: var(--transition-base);
+        }
+
+        .tag:hover {
+            background-color: var(--primary);
+            color: #fff;
+        }
+
+        .desc-text {
+            font-size: 16px;
+            color: var(--gray-600);
+            line-height: 1.8;
+            margin-bottom: 32px;
         }
 
         .card-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 26px;
         }
 
-        .card {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 18px;
+        .content-card {
+            background-color: var(--gray-100);
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            padding: 28px;
+            transition: var(--transition-base);
+            position: relative;
+            overflow: hidden;
         }
 
-        .card h4 { color: #0369a1; font-size: 15px; margin-bottom: 8px; }
-        .card p { font-size: 13px; color: #475569; line-height: 1.6; }
+        .content-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0;
+            background: var(--primary);
+            transition: var(--transition-base);
+        }
 
+        .content-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 30px rgba(2, 132, 199, 0.11);
+            border-color: #bae6fd;
+        }
+
+        .content-card:hover::before {
+            height: 100%;
+        }
+
+        .content-card h4 {
+            font-size: 18px;
+            color: #0369a1;
+            margin-bottom: 12px;
+        }
+
+        .content-card p {
+            font-size: 15px;
+            color: var(--gray-600);
+            line-height: 1.75;
+        }
+
+        /* ========== 底部蓝底 Footer，二维码放在这里 ========== */
         footer {
-            background-color: #0f172a;
-            color: #64748b;
-            text-align: center;
-            padding: 20px;
-            font-size: 12px;
-            margin-top: 40px;
+            background-color: var(--dark);
+            color: #94a3b8;
+            padding: 50px 24px;
+            font-size: 14px;
+            margin-top: 90px;
         }
 
-        /* 📱 手机端适配 */
+        .footer-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .footer-info {
+            flex: 1;
+            min-width: 260px;
+            text-align: center;
+        }
+
+        .footer-qrcode {
+            flex-shrink: 0;
+            text-align: center;
+        }
+
+        .footer-qrcode .qrcode-wrap {
+            display: inline-block;
+            padding: 18px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .footer-qrcode img {
+            width: 160px;
+            height: 160px;
+            object-fit: contain;
+        }
+
+        .qrcode-tips {
+            margin-top: 12px;
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        /* ========== 移动端适配 ========== */
         @media (max-width: 768px) {
-            .hero-content { flex-direction: column-reverse; }
-            .main-container { flex-direction: column; padding: 0 15px; }
-            .sidebar { width: 100%; }
-            .menu-list {
-                flex-direction: row;
+            .header-nav {
+                display: none;
+            }
+            .brand-art-logo {
+                height: 28px;
+            }
+            .header-wrap {
+                padding: 14px 16px;
+            }
+            .hero {
+                padding: 50px 16px;
+            }
+            .hero-container {
+                flex-direction: column-reverse;
+                gap: 40px;
+            }
+            .hero-title-cn {
+                font-size: 28px;
+            }
+            .hero-pic {
+                text-align: center;
+            }
+            .contact-btn {
+                width: 100%;
+                text-align: center;
+            }
+            .main-wrap {
+                flex-direction: column;
+                padding: 0 16px;
+                gap: 24px;
+            }
+            .sidebar {
+                width: 100%;
+            }
+            .side-menu {
+                display: flex;
                 overflow-x: auto;
                 -webkit-overflow-scrolling: touch;
             }
-            .menu-item {
-                padding: 12px 16px;
-                font-size: 14px;
-                border-bottom: none;
-                border-right: 1px solid #f1f5f9;
+            .side-menu-item {
                 white-space: nowrap;
+                padding: 16px 22px;
+                border-bottom: none !important;
+                border-right: 1px solid var(--gray-100);
             }
-            .menu-item.active {
-                border-left: none;
-                border-bottom: 3px solid #0284c7;
+            .side-menu-item.active::before {
+                width: 60%;
+                height: 4px;
+                left: 20%;
+                top: auto;
+                bottom: 0;
+                border-radius: 4px 4px 0 0;
             }
-            .content-area { padding: 20px 15px; }
-            .card-grid { grid-template-columns: 1fr; }
+            .side-menu-item:hover:not(.active) {
+                padding-left: 22px;
+            }
+            .tab-content-box {
+                padding: 26px 20px;
+            }
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-qrcode img {
+                width: 140px;
+                height: 140px;
+            }
+        }
+
+        .fade-animate {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: all 0.6s ease-out;
+        }
+
+        .fade-animate.show {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 <body>
-
     <header>
-        <div class="header-container">
+        <div class="header-wrap">
             <div class="logo-box">
-                <img src="https://github.com/lengyuxuan22/my-image-bed/blob/main/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260721203244_164_412.png?raw=true" alt="灵溯·天枢 Logo" id="site-logo">
-                <span class="brand-name">灵溯·天枢</span>
+                <img src="https://s41.ax1x.com/2026/07/21/pmcFX8O.png" alt="灵溯·天枢">
+                <!-- 填入灵溯天枢艺术字图片链接 -->
+                <img class="brand-art-logo" src="https://s41.ax1x.com/2026/07/21/pmcAdXQ.png" alt="灵溯·天枢">
             </div>
-            <nav>
+            <div class="header-nav">
                 <a href="#" class="active">首页</a>
                 <a href="#">智能运维</a>
                 <span class="lang-switch">EN / CN</span>
-            </nav>
+            </div>
         </div>
     </header>
 
-    <section class="hero">
-        <div class="hero-content">
+    <section class="hero fade-animate">
+        <div class="hero-container">
             <div class="hero-text">
                 <div class="hero-title-en">INTELLIGENT EMU PHM SYSTEM</div>
                 <div class="hero-title-cn">动车组全生命周期智能运维解决方案</div>
-                <div class="hero-subtitle">依托中国超大规模高铁路网实测数据，打造“数据驱动、提前预警、降本增效”的专属智能预测运维新范式。</div>
+                <div class="hero-subtitle">
+                    依托中国超大规模高铁路网实测数据，打造“数据驱动、提前预警、降本增效”的专属智能预测运维新范式。
+                </div>
+                <!-- 只保留联系我们按钮，已经删掉旁边艺术字 -->
+                <a href="#footer-qrcode" class="contact-btn">联系我们</a>
             </div>
-            <div class="hero-image">
-                <img src="https://github.com/lengyuxuan22/my-image-bed/blob/main/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20260721191445_149_412.png?raw=true" alt="智能动车运维">
+
+            <div class="hero-pic">
+                <img src="https://s41.ax1x.com/2026/07/21/pmcFHV1.png" alt="智能动车运维">
             </div>
         </div>
     </section>
 
-    <div class="main-container">
-        
+    <div class="main-wrap fade-animate">
         <aside class="sidebar">
-            <ul class="menu-list">
-                <li class="menu-item active" onclick="switchTab(0)">产品介绍</li>
-                <li class="menu-item" onclick="switchTab(1)">购买渠道</li>
-                <li class="menu-item" onclick="switchTab(2)">售后服务</li>
-            </ul>
+            <div class="side-menu">
+                <div class="side-menu-item active" data-index="0">产品介绍</div>
+                <div class="side-menu-item" data-index="1">购买渠道</div>
+                <div class="side-menu-item" data-index="2">售后服务</div>
+            </div>
         </aside>
 
-        <main class="content-area">
-            
+        <div class="tab-content-box">
             <div class="tab-panel active">
                 <h2 class="section-title">产品介绍</h2>
-                <div class="feature-tag-container">
+                <div class="tag-group">
                     <span class="tag">中国高铁数据</span>
                     <span class="tag">十四五规划</span>
                     <span class="tag">海外专属PHM</span>
                     <span class="tag">全生命周期优化</span>
                 </div>
-                <p style="font-size: 14px; color: #334155; line-height: 1.7; margin-bottom: 15px;">
+                <p class="desc-text">
                     本产品是依托中国全球最大高铁网络、海量轨道运维数据，贴合国家“十四五”数智化转型规划研发的高铁 <strong>PHM（故障预测与健康管理）智能运维系统</strong>。作为面向海外市场的动车组全生命周期智能运维解决方案，主打<b>“数据驱动、提前预警、降本增效”</b>核心优势，打造专属中国动车组的国际化运维方案。
                 </p>
                 <div class="card-grid">
-                    <div class="card">
+                    <div class="content-card">
                         <h4>针对海外痛点研发</h4>
                         <p>专门解决海外高铁售后成本高、维保周期长、故障响应滞后等传统运维难题，填补海外高铁智能预测运维市场缺口。</p>
                     </div>
-                    <div class="card">
+                    <div class="content-card">
                         <h4>核心竞争壁垒</h4>
                         <p>对比西班牙等海外传统高铁运维体系，具备独家海量行业实测数据积累与传感器全生命周期优化的核心壁垒。</p>
                     </div>
@@ -323,49 +597,72 @@
 
             <div class="tab-panel">
                 <h2 class="section-title">购买渠道</h2>
-                <div class="card" style="background: #f0f9ff; border-color: #bae6fd; margin-top: 15px;">
-                    <h4 style="color: #0369a1; font-size: 16px;">随车绑定售卖模式（核心主流渠道）</h4>
-                    <p style="color: #0c4a6e; font-size: 14px; margin-top: 8px;">
-                        本系统主打随车绑定售卖模式，与高铁动车组设备配套绑定输出。面向海外高铁项目及轨道交通合作方进行定向落地，是产品的核心主流销售渠道。
-                    </p>
+                <div class="content-card" style="background: var(--primary-bg); border-color: #bae6fd;">
+                    <h4>随车绑定售卖模式（核心主流渠道）</h4>
+                    <p>本系统主打随车绑定售卖模式，与高铁动车组设备配套绑定输出。面向海外高铁项目及轨道交通合作方进行定向落地，是产品的核心主流销售渠道。</p>
                 </div>
             </div>
 
             <div class="tab-panel">
                 <h2 class="section-title">售后服务</h2>
                 <div class="card-grid">
-                    <div class="card">
+                    <div class="content-card">
                         <h4>专属产品咨询指南</h4>
                         <p>为海外客户提供产品功能、技术参数、适配场景、收费模式、定制化服务等全维度咨询解答，助力客户全面了解产品体系。</p>
                     </div>
-                    <div class="card">
+                    <div class="content-card">
                         <h4>完善的售后服务索引体系</h4>
                         <p>覆盖产品部署调试、系统运维、数据更新、功能迭代、故障排查等全流程售后工作。依托大数据后台持续保障系统稳定运行，解决海外响应慢、成本高的痛点。</p>
                     </div>
                 </div>
             </div>
-
-        </main>
+        </div>
     </div>
 
-    <footer>
-        <p>&copy; 2026 灵溯·天枢 (Lingsu Tianshu)<br>动车组全生命周期智能运维系统</p>
+    <!-- 底部蓝底：二维码 -->
+    <footer id="footer-qrcode">
+        <div class="footer-inner">
+            <div class="footer-info">
+                <p>&copy; 2026 灵溯·天枢 (Lingsu Tianshu)<br>动车组全生命周期智能运维系统</p>
+            </div>
+
+            <div class="footer-qrcode">
+                <div class="qrcode-wrap">
+                    <!-- 填入二维码图片地址 -->
+                    <img src="https://s41.ax1x.com/2026/07/21/pmckIW8.png" alt="联系我们二维码">
+                    <div class="qrcode-tips">扫码咨询产品详情</div>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <script>
-        function switchTab(index) {
-            // 获取所有的菜单项和内容面板
-            const menuItems = document.querySelectorAll('.menu-item');
-            const tabPanels = document.querySelectorAll('.tab-panel');
+        const menuItems = document.querySelectorAll('.side-menu-item');
+        const tabPanels = document.querySelectorAll('.tab-panel');
 
-            // 清除所有的 active 类
-            menuItems.forEach(item => item.classList.remove('active'));
-            tabPanels.forEach(panel => panel.classList.remove('active'));
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const idx = Number(item.dataset.index);
+                menuItems.forEach(b => b.classList.remove('active'));
+                tabPanels.forEach(p => p.classList.remove('active'));
+                item.classList.add('active');
+                tabPanels[idx].classList.add('active');
+            });
+        });
 
-            // 给被点击的菜单和对应的面板添加 active 类
-            menuItems[index].classList.add('active');
-            tabPanels[index].classList.add('active');
+        const animateItems = document.querySelectorAll('.fade-animate');
+
+        function checkScroll() {
+            animateItems.forEach(item => {
+                const rect = item.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 120) {
+                    item.classList.add('show');
+                }
+            });
         }
+
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
     </script>
 </body>
 </html>
