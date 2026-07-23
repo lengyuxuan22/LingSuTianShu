@@ -442,20 +442,15 @@
             font-size: 14px;
         }
 
-        /* ========== 吉祥物悬浮组件 左下角趴窗 ========== */
-        @keyframes floatMascot {
-            0% {transform: translateY(0);}
-            50% {transform: translateY(-8px);}
-            100% {transform: translateY(0);}
-        }
+        /* ========== 吉祥物悬浮组件 左下角趴窗【固定无动画】 ========== */
         .mascot-float {
             position: fixed;
             left: 12px;
-            bottom: -30px;
+            bottom: -36px;
             z-index: 98;
             width: 180px;
             pointer-events: none;
-            animation: floatMascot 3.2s ease-in-out infinite;
+            /* 已移除上下浮动动画 */
         }
         .mascot-float img {
             width: 100%;
@@ -537,10 +532,11 @@
                 width: 140px;
                 height: 140px;
             }
-            /* 手机端吉祥物缩小 */
+            /* 手机端吉祥物调大尺寸，同步调整底部偏移 */
             .mascot-float {
-                width: 110px;
+                width: 130px;
                 left:4px;
+                bottom: -26px;
             }
         }
 
