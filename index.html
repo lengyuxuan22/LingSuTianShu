@@ -442,6 +442,26 @@
             font-size: 14px;
         }
 
+        /* ========== 吉祥物悬浮组件 左下角趴窗 ========== */
+        @keyframes floatMascot {
+            0% {transform: translateY(0);}
+            50% {transform: translateY(-8px);}
+            100% {transform: translateY(0);}
+        }
+        .mascot-float {
+            position: fixed;
+            left: 12px;
+            bottom: -36px;
+            z-index: 98;
+            width: 180px;
+            pointer-events: none;
+            animation: floatMascot 3.2s ease-in-out infinite;
+        }
+        .mascot-float img {
+            width: 100%;
+            display:block;
+        }
+
         /* ========== 移动端适配【重点修复】 ========== */
         @media (max-width: 768px) {
             .header-nav {
@@ -516,6 +536,11 @@
             .footer-qrcode img {
                 width: 140px;
                 height: 140px;
+            }
+            /* 手机端吉祥物缩小 */
+            .mascot-float {
+                width: 110px;
+                left:4px;
             }
         }
 
@@ -658,6 +683,11 @@
             </div>
         </div>
     </footer>
+
+    <!-- ========== 左下角吉祥物悬浮层 ========== -->
+    <div class="mascot-float">
+        <img src="https://s41.ax1x.com/2026/07/23/pmgSGeP.png" alt="中车吉祥物">
+    </div>
 
     <script>
         const menuItems = document.querySelectorAll('.side-menu-item');
